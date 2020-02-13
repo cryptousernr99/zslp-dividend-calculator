@@ -99,7 +99,7 @@ async function processTokenDivs(tokenId, amount, isZCLdividend=true){
        }
      }
   }  
-  return {token_name: tokenName, circulating_supply: circTokens, amount_holders: nrHolders, addresses: final}
+  return {token_name: tokenName, circulating_supply: circTokens, amount_holders: nrHolders, addresses: final.trim()}
 }
 
 // listen for requests :)

@@ -108,7 +108,7 @@ li {
   padding-bottom: 2.5rem;
 }
 
-#tokenName {
+#tokenName, #options {
   display: none;
 }
 

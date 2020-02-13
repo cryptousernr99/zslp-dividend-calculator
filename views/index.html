@@ -38,8 +38,10 @@
                     $('#csupp').text(returned.circulating_supply)
                     $('#aeleg').text(returned.amount_holders)
                     $('#tokenName').show()
+                    $('#options').show()
                   } else {
                     $('#tokenName').hide()
+                    $('#options').hide()
                     $('#result').text(returned.errormsg)
                   }
                 }
@@ -51,6 +53,23 @@
             $('#result').text('')
             $('#mainform').trigger("reset")            
         });
+        
+        $("#copyBtn").click(function(){
+          $("#result").select();
+          document.execCommand('copy');
+          alert('Addresses copied to clipboard!')
+        });
+        
+        $('#exportBtn').click(function () {
+          var textFile = $('#result').val();
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textFile));
+          element.setAttribute('download', 'addresses.csv');
+          element.style.display = 'none';
+          document.body.appendChild(element);
+          element.click();
+          document.body.removeChild(element);
+        })
       })
     </script>
   </head>
@@ -78,6 +97,10 @@
               <span class="bold">Addresses elegible to receive this dividend: </span><span id="aeleg"></span>
             </div>
             <textarea id="result" rows="10" cols="80" placeholder="Valid addresses will be shown here." readonly></textarea>
+            <div id="options">
+              <button class="myButton" type="submit" id="copyBtn">Copy</button>
+              <button class="myButton" type="button" id="exportBtn">Export as CSV</button>              
+            </div>
           </div>
         </div>
       </div>
