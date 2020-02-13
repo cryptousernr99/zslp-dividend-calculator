@@ -1,0 +1,88 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ZSLP Dividend Calculator</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    
+    <!-- import the webpage's client-side javascript file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#mainform').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url:'/calculate',
+                type:'post',
+                data:$('#mainform').serialize(),
+                success:function(returned){
+                  if (returned.error == undefined){
+                    $('#result').text(returned.addresses)
+                    $('#tname').text(returned.token_name)
+                    $('#csupp').text(returned.circulating_supply)
+                    $('#aeleg').text(returned.amount_holders)
+                    $('#tokenName').show()
+                  } else {
+                    $('#tokenName').hide()
+                    $('#result').text(returned.errormsg)
+                  }
+                }
+            });
+        });
+       
+        $('#mainform').on('click', '#clearBtn', function(){
+            $('#tokenName').hide()
+            $('#result').text('')
+            $('#mainform').trigger("reset")            
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>ZSLP Dividend Calculator</h1>
+    </header>
+      <div id="main">
+        <div class="myform">
+          <form action="/calculate" id="mainform" method="POST">
+            <p class="mb bold">Receiver ZSLP Token ID:</p>
+            <input id="inputzSlpTokenId" name="zslpTokenId" placeholder="Holders of this ZSLP token will receive your dividend payment" required="" class="Input-sc-1gmh0az-0 fZDKja" value="" type="string">
+            <p class="mb bold">Dividend payment:</p>
+            <input id="inputDividendZcl" name="dividendZcl" min="1" step="any" placeholder="Total dividend payment, to be split between all token holders" required="" class="Input-sc-1gmh0az-0 fZDKja" value="" type="number">
+            <p class="mb bold centered">Type of Dividend:</p>
+            <input type="radio" id="ZCL" name="divType" value="ZCL" checked><label for="ZCL">ZCL (holders receive ZCL)</label>
+            <input type="radio" id="ZSLP" name="divType" value="ZSLP"><label for="ZSLP">ZSLP (holders receive ZSLP token)</label><br>
+            <button class="myButton" type="submit" id="calculateBtn">Calculate!</button>
+            <button class="myButton" type="button" id="clearBtn">Start again</button>
+          </form>
+          <div>
+            <div class="mb" id="tokenName">
+              <span class="bold">Token Name: </span><span id="tname"></span><br>
+              <span class="bold">Circulating supply: </span><span id="csupp"></span><br>
+              <span class="bold">Addresses elegible to receive this dividend: </span><span id="aeleg"></span>
+            </div>
+            <textarea id="result" rows="10" cols="80" placeholder="Valid addresses will be shown here." readonly></textarea>
+          </div>
+        </div>
+      </div>
+      <footer class="centered">
+        Made with ❤ by <a href="https://twitter.com/cryptousernr99">cryptousernr99</a>! - my ZCL address: t1Sk6Q1yztZwqqV8KnqNQgTfqdm33U4u1cw
+      </footer>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+/* styles */
+/* called by your view template */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.mb {
+  margin-bottom: 5px;
+}
+
+.centered {
+  text-align: center;
+}
+
+p {
+  text-align: left;
+}
+
+.myform {
+  text-align: center;  
+}
+
+form {
+  margin-bottom: 25px;
+  padding: 15px;
+  /*background-color: cyan;*/
+  display: inline-block;
+  width: 100%;
+  max-width: 75%;
+  border-radius: 3px;
+  border: 1px solid lightgrey;  
+}
+
+input[type=string], input[type=number] {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+input[type=radio] {
+  font-size: 16px;
+}
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background-color:#fb9e25;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:16px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #cc9f52;
+}
+.myButton:hover {
+	background-color:#ebb470;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+button {
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: yellow;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+#main {  
+  padding-bottom: 2.5rem;
+}
+
+#tokenName {
+  display: none;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 95%;
+  height: 2.5rem;
+  padding-top: 5px;
+  border-top: 1px solid lightgrey;
+}
